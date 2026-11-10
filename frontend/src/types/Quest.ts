@@ -4,5 +4,5 @@ export type Quest = {
   members: boolean;
   title: string;
   qp: number;
-  status: "STARTED" | "NOT_STARTED" | "COMPLETED";
+  status: 'STARTED' | 'NOT_STARTED' | 'COMPLETED';
 }
