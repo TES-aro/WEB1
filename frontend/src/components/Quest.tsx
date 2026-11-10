@@ -4,7 +4,7 @@ export const Quest = ({ id, title, difficulty, members, qp, eligible, status }) 
 	let dif;
 	switch (difficulty) {
 	case 0:
-		dif = 'novice';
+		dif = 'Novice';
 		break;
 	case 1:
 		dif = 'Intermediate';
@@ -24,12 +24,11 @@ export const Quest = ({ id, title, difficulty, members, qp, eligible, status }) 
 	}
 
 	const membOnly = members ? 'yes' : 'no';
-	const elig = eligible ? 'yes' : 'no';
 
 	let statusStr;
 	switch (status){
 	case 'NOT_STARTED':
-		statusStr = 'not started';
+		statusStr = eligible ? 'eligible' : 'ineligible';
 		break;
 	case 'STARTED':
 		statusStr = 'started';
@@ -46,11 +45,10 @@ export const Quest = ({ id, title, difficulty, members, qp, eligible, status }) 
 	return(
 		<TableRow key={id}>
 			<TableCell> <Link href={wikiURL} underline='hover' >{title} </Link></TableCell>
-			<TableCell> {qp} </TableCell>
-			<TableCell> {dif} </TableCell>
-			<TableCell> {membOnly} </TableCell>
-			<TableCell> {statusStr} </TableCell>
-			<TableCell> {elig} </TableCell>
+			<TableCell align='right'> {qp} </TableCell>
+			<TableCell align='right'> {dif} </TableCell>
+			<TableCell align='right'> {membOnly} </TableCell>
+			<TableCell align='right'> {statusStr} </TableCell>
 		</TableRow>
 	);
 };

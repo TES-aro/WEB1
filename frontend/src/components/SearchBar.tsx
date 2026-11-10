@@ -1,22 +1,18 @@
 import { TextField, Button } from '@mui/material';
 import { useState } from 'react';
-import { getPlayer } from '../services/apiFetch'; 
+import { useNavigate } from 'react-router-dom'; 
 
-export const SearchBar = ({setPlayer, setEvents}) => {
+export const SearchBar = ({url}) => {
 	const [name, setName] = useState('');
+	const navigate = useNavigate();
+
 	const handleChange = (e: any) => {
 		const { value } = e.target;
 		setName(value);
 	};
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		try{
-			const data = await getPlayer.data(name);
-			console.log(data)
-		} catch(e){
-			console.log(e)
-		}
-		console.log(`you have attempted to find user: ${name}`);
+		navigate(`${url}/${name}`)
 	};
 
 	return(

@@ -18,7 +18,6 @@ export const Quests = ({ quests }) => {
 						<TableCell align='right'> Difficulty </TableCell>
 						<TableCell align='right'> Members Only </TableCell>
 						<TableCell align='right'> Status </TableCell>
-						<TableCell align='right'> Eligible </TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
