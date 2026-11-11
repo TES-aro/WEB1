@@ -10,8 +10,8 @@ export const Skill = ({ skillName, fine_xp, level }) => {
 			<TableCell>
 				<Link href={url}> {skillName} </Link>
 			</TableCell>
-			<TableCell> {level} </TableCell>
-			<TableCell> {fine_xp} </TableCell>
+			<TableCell align='right'> {level} </TableCell>
+			<TableCell align='right'> {fine_xp} </TableCell>
 		</TableRow>
 	);
 };

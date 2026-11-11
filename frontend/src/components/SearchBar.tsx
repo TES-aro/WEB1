@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const SearchBar = ({url}) => {
 	const [name, setName] = useState('');
 	const navigate = useNavigate();
+	const URL = url ? url : '/player'
 
 	const handleChange = (e: any) => {
 		const { value } = e.target;
@@ -12,7 +13,7 @@ export const SearchBar = ({url}) => {
 	};
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-		navigate(`${url}/${name}`)
+		navigate(`${URL}/${name}`)
 	};
 
 	return(

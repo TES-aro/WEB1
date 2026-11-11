@@ -18,7 +18,8 @@ export const Skills = ({ skills }) => {
 			<TableBody>
 				{keys.map(k => {
 					return(
-						<Skill skillName={k}
+						<Skill key={k}
+							skillName={k}
 							fine_xp={skills[k].fine_xp}
 							level={skills[k].level}
 						/>
