@@ -1,12 +1,12 @@
 import { TableCell, TableRow, Link } from '@mui/material';
 
-export const Quest = ({ id, title, difficulty, members, qp, status }) => {
+export const Quest = ({ title, difficulty, members, qp, status }) => {
 	
 	const formatedName = title.replace(' ', '_');
 	const wikiURL = `https://runescape.wiki/w/${formatedName}`;
 
 	return(
-		<TableRow key={id}>
+		<TableRow >
 			<TableCell> <Link href={wikiURL} underline='hover' >{title} </Link></TableCell>
 			<TableCell align='right'> {qp} </TableCell>
 			<TableCell align='right'> {difficulty} </TableCell>

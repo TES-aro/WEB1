@@ -3,16 +3,9 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { getPlayer } from './services/apiFetch.ts';
 import { SearchBar } from './components/SearchBar';
 import { ErrorNotif } from './components/ErrorNotif.tsx';
+import { Home } from './components/Home.tsx'
 import Info from './components/Info.tsx'
 import './App.css';
-
-function Home(){
-	return(
-		<div>
-			<p> you're home! </p>
-		</div>
-	)
-}
 
 function App() {
 	const [err, setErr] = useState('');
@@ -32,8 +25,7 @@ function App() {
 		const id = name.toLowerCase();
 		try{
 		const info = await getPlayer(id);
-		const newPlayers = JSON.parse(JSON.stringify(players))
-		newPlayers[id] = info;
+		const newPlayers = {...players, [id]: info}
 		setPlayers(newPlayers)
 		return info;
 		} catch(e) {

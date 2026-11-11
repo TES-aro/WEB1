@@ -208,7 +208,7 @@ export const Quests = ({ quests }) => {
 				<TableBody>
 					{questsArr.map(q => {
 						return (
-							<Quest id={q.id} title={q.title}
+							<Quest key={q.id} title={q.title}
 								difficulty={q.difficulty}
 								members={q.members} qp={q.qp}
 								status={q.status}

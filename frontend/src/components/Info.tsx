@@ -1,6 +1,7 @@
 import {Skills} from './Skills.tsx'
 import {Quests} from './Quests.tsx'
 import {SearchBar} from './SearchBar.tsx'
+import { PlayerCard } from './PlayerCard.tsx' 
 import { useParams } from 'react-router-dom'
 
 const Info = ({addPlayer, players}) => {
@@ -16,8 +17,8 @@ const Info = ({addPlayer, players}) => {
     const player = players[params.username.toLowerCase()]
     return(
       <div>
-        <h3> showing info of {player.name} </h3>
         <SearchBar url='/player' />
+        <PlayerCard player={player} />
         <Skills skills={player.skills} />
         <Quests quests={player.quests} />
       </div>
@@ -27,8 +28,8 @@ const Info = ({addPlayer, players}) => {
     const player = addPlayer(params.username)
     return(
       <div>
-        <h3> showing info of {player.name} </h3>
         <SearchBar url='/player' />
+        <PlayerCard player={player} />
         <Skills skills={player.skills} />
         <Quests quests={player.quests} />
       </div>
