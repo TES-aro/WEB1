@@ -1,8 +1,15 @@
 import { Quest } from './Quest.tsx';
-import { Table, TableBody, TableHead, TableRow, TableCell, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from  '@mui/material';
+import { Table, TableBody, TableHead, TableRow, TableCell, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box, FormGroup, Checkbox } from  '@mui/material';
 import { useState, useId } from 'react'
 
 type QuestStatus =  "Completed" | "Started" | "Eligible" | "Ineligible"
+
+type StatusFilter = {
+	Completed: boolean;
+	Started: boolean;
+	Eligible: boolean;
+	Ineligible: boolean;
+}
 
 type QuestFilter = {
 	membersOnly: "yes" | "no" | "all";
@@ -78,6 +85,7 @@ function filterQuest(f: "yes"|"no"|"all", q: QuestStr){
 	}
 	return f === q.members;
 }
+
 function filter(membersOnly, status, quests){
 	let questArr: QuestStr[] = []
 	const keys = Object.keys(quests)
@@ -86,7 +94,7 @@ function filter(membersOnly, status, quests){
 		if (!filterQuest(membersOnly, quest)){
 			return;
 		}
-		if(status.includes(quest.status)){
+		if(status[quest.status]){
 			questArr = questArr.concat(quest);
 		}
 	})
@@ -95,6 +103,21 @@ function filter(membersOnly, status, quests){
 
 export const Quests = ({ quests }) => {
 	const [membFilter, setMembFilter] = useState('all');
+	const [statusFilter, setStatusFilter] = useState({
+		Completed: true,
+		Started: true,
+		Eligible: true,
+		Ineligible: true
+	})
+
+	const handleStatus = (event) => {
+		const newStatus = {
+			...statusFilter,
+			[event.target.name]: event.target.checked
+		}
+		setStatusFilter(newStatus);
+		console.log(newStatus)
+	}
 
 	const handleMemberFilter = (event) => {
 		setMembFilter(event.target.value)
@@ -107,30 +130,71 @@ export const Quests = ({ quests }) => {
 	}
 
 
-	const questsArr = filter(membFilter, ["Completed", "Started", "Eligible", "Ineligible"] , quests);
-	if (questsArr.length === 0){
-		return (
-			<div>
-				<p> something went wrong. quest arr is empty </p>
-			</div>
-		)
-	}
+	const questsArr = filter(membFilter, statusFilter , quests);
 
 	return(
 		<>
-			<FormControl>
-				<FormLabel id={`${rid}-member-label`}> Members Only: </FormLabel>
-				<RadioGroup
-					aria-labelledby={`${rid}-members-label`}
-					name="members-radio"
-					value={membFilter}
-					onChange={handleMemberFilter}
-				>
-					<FormControlLabel value='all' control={<Radio />} label="All" />
-					<FormControlLabel value='yes' control={<Radio />} label="Members Only" />
-					<FormControlLabel value='no' control={<Radio />} label="Free-to-play" />
-				</RadioGroup>
-			</FormControl>
+			<Box sx={{ display: 'flex'}}>	
+				<FormControl>
+					<FormLabel id={`${rid}-member-label`}> Members Only: </FormLabel>
+					<RadioGroup
+						aria-labelledby={`${rid}-members-label`}
+						name="members-radio"
+						value={membFilter}
+						onChange={handleMemberFilter}
+					>
+						<FormControlLabel value='all' control={<Radio />} label="All" />
+						<FormControlLabel value='yes' control={<Radio />} label="Members Only" />
+						<FormControlLabel value='no' control={<Radio />} label="Free-to-play" />
+					</RadioGroup>
+				</FormControl>
+				<FormControl>
+					<FormLabel id={`${rid}-status-label`}>Show:</FormLabel>
+					<FormGroup>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={statusFilter.Completed}
+									onChange={handleStatus}
+									name="Completed"
+								/>
+							}
+							label="Completed"
+						/>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={statusFilter.Started}
+									onChange={handleStatus}
+									name="Started"
+								/>
+							}
+							label="Started"
+						/>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={statusFilter.Eligible}
+									onChange={handleStatus}
+									name="Eligible"
+								/>
+							}
+							label="Eligible"
+						/>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={statusFilter.Ineligible}
+									onChange={handleStatus}
+									name="Ineligible"
+								/>
+							}
+							label="Ineligible"
+						/>
+
+					</FormGroup>
+				</FormControl>
+			</Box>
 			<Table aria-label="simple table">
 				<TableHead>
 					<TableRow>
