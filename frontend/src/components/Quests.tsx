@@ -1,8 +1,8 @@
 import { Quest } from './Quest.tsx';
 import { Table, TableBody, TableHead, TableRow, TableCell, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Box, FormGroup, Checkbox } from  '@mui/material';
-import { useState, useId } from 'react'
+import { useState, useId } from 'react';
 
-type QuestStatus =  "Completed" | "Started" | "Eligible" | "Ineligible"
+type QuestStatus =  'Completed' | 'Started' | 'Eligible' | 'Ineligible'
 
 type StatusFilter = {
 	Completed: boolean;
@@ -12,10 +12,9 @@ type StatusFilter = {
 }
 
 type QuestFilter = {
-	membersOnly: "yes" | "no" | "all";
+	membersOnly: 'yes' | 'no' | 'all';
 	status: QuestStatus[]
 }
-
 
 type QuestStr = {
 	id: string;
@@ -74,21 +73,21 @@ function setStatus(quest, key): QuestStr {
 		difficulty: dif,
 		qp: quest.qp,
 		status: statusStr
-	}
+	};
 
 	return newQuest as QuestStr;
 }
 
-function filterQuest(f: "yes"|"no"|"all", q: QuestStr){
-	if (f === "all"){
+function filterQuest(f: 'yes'|'no'|'all', q: QuestStr){
+	if (f === 'all'){
 		return true;
 	}
 	return f === q.members;
 }
 
 function filter(membersOnly, status, quests){
-	let questArr: QuestStr[] = []
-	const keys = Object.keys(quests)
+	let questArr: QuestStr[] = [];
+	const keys = Object.keys(quests);
 	keys.forEach(k => {
 		const quest = setStatus(quests[k], k);
 		if (!filterQuest(membersOnly, quest)){
@@ -97,10 +96,12 @@ function filter(membersOnly, status, quests){
 		if(status[quest.status]){
 			questArr = questArr.concat(quest);
 		}
-	})
+	});
 	return questArr;
 }
-
+const questTheme = {
+	bgcolor: '#8be9fd',
+};
 export const Quests = ({ quests }) => {
 	const [membFilter, setMembFilter] = useState('all');
 	const [statusFilter, setStatusFilter] = useState({
@@ -108,20 +109,20 @@ export const Quests = ({ quests }) => {
 		Started: true,
 		Eligible: true,
 		Ineligible: true
-	})
+	});
 
 	const handleStatus = (event) => {
 		const newStatus = {
 			...statusFilter,
 			[event.target.name]: event.target.checked
-		}
+		};
 		setStatusFilter(newStatus);
-		console.log(newStatus)
-	}
+		console.log(newStatus);
+	};
 
 	const handleMemberFilter = (event) => {
-		setMembFilter(event.target.value)
-	}
+		setMembFilter(event.target.value);
+	};
 
 	const rid = useId();
 
@@ -129,12 +130,11 @@ export const Quests = ({ quests }) => {
 		return;
 	}
 
-
 	const questsArr = filter(membFilter, statusFilter , quests);
 
 	return(
 		<>
-			<Box sx={{ display: 'flex'}}>	
+			<Box sx={{ display: 'flex' }}>
 				<FormControl>
 					<FormLabel id={`${rid}-member-label`}> Members Only: </FormLabel>
 					<RadioGroup
@@ -196,7 +196,7 @@ export const Quests = ({ quests }) => {
 				</FormControl>
 			</Box>
 			<Table aria-label="simple table">
-				<TableHead>
+				<TableHead sx={{ bgcolor: questTheme.bgcolor }}>
 					<TableRow>
 						<TableCell> Quest name </TableCell>
 						<TableCell align='right'> QP </TableCell>

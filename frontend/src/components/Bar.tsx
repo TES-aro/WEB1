@@ -1,4 +1,4 @@
 
-export const Bar = ({state}) => {
+export const Bar = ({ state }) => {
 
-}
+};

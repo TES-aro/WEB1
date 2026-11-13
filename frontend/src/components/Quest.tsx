@@ -1,7 +1,7 @@
 import { TableCell, TableRow, Link } from '@mui/material';
 
 export const Quest = ({ title, difficulty, members, qp, status }) => {
-	
+
 	const formatedName = title.replace(' ', '_');
 	const wikiURL = `https://runescape.wiki/w/${formatedName}`;
 

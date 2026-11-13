@@ -3,9 +3,9 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import { getPlayer } from './services/apiFetch.ts';
 import { SearchBar } from './components/SearchBar';
 import { ErrorNotif } from './components/ErrorNotif.tsx';
-import { Home } from './components/Home.tsx'
-import Info from './components/Info.tsx'
-import EventPage from './components/EventPage.tsx'; 
+import { Home } from './components/Home.tsx';
+import Info from './components/Info.tsx';
+import EventPage from './components/EventPage.tsx';
 import './App.css';
 
 function App() {
@@ -13,33 +13,33 @@ function App() {
 	const [players, setPlayers] = useState({});
 	const navigate = useNavigate();
 	useEffect(() => {
-		console.log("the state of players has changed.")
-	},[players])
+		console.log('the state of players has changed.');
+	},[players]);
 
 	const useError = (message: string) => {
 		setErr(message);
 		setTimeout(() => {
-			setErr('')
-		}, 8000)
-	}
+			setErr('');
+		}, 8000);
+	};
 	const addPlayer = async (name: string) => {
 		const id = name.toLowerCase();
 		try{
-		const info = await getPlayer(id);
-		const newPlayers = {...players, [id]: info}
-		setPlayers(newPlayers)
-		return info;
+			const info = await getPlayer(id);
+			const newPlayers = { ...players, [id]: info };
+			setPlayers(newPlayers);
+			return info;
 		} catch(e) {
-			console.error(e)
-			navigate('/')
+			console.error(e);
+			navigate('/');
 			if(!e.message){
-				useError("unknown error");
+				useError('unknown error');
 				return;
 			}
-			useError(e.message)
-				return;
+			useError(e.message);
+			return;
 		}
-	}
+	};
 
 	return(
 		<div>
@@ -64,7 +64,7 @@ function App() {
 				/>
 			</Routes>
 		</div>
-	)
+	);
 /*
 	return(
 		<div>

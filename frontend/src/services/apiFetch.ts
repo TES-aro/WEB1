@@ -23,12 +23,12 @@
 //	data: getPlayerData
 //}
 const fetchPlayer = async (username: string) => {
-	const resp = await fetch(`http://localhost:3001/${username}`)
+	const resp = await fetch(`http://localhost:3001/${username}`);
 	if (!resp.ok){
-		throw new Error(`Couldn't find user: ${username}`)
+		throw new Error(`Couldn't find user: ${username}`);
 	}
 	return resp.json();
-}
+};
 
 function isValidNic(nic: string): boolean{
 	if(nic.length > 12){
