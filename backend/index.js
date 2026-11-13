@@ -35,7 +35,8 @@ app.get('/:name', async (req, res) => {
   const name = req.params.name;
   try{
   	const data = await getPlayerData(name);
-  	const events = getPlayerEvents(name);
+  	const events = await getPlayerEvents(name);
+  	console.log(events)
   	const playerObject = {
   		name: data.name,
   		skills: data.skills,

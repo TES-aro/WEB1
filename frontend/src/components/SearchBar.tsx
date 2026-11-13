@@ -26,6 +26,7 @@ export const SearchBar = ({url}) => {
 				size="medium"
 				variant="outlined"
 				placeholder="username"
+				margin='normal'
 			/>
 			<Button type="submit"> Search </Button>
 		</form>

@@ -5,6 +5,7 @@ import { SearchBar } from './components/SearchBar';
 import { ErrorNotif } from './components/ErrorNotif.tsx';
 import { Home } from './components/Home.tsx'
 import Info from './components/Info.tsx'
+import EventPage from './components/EventPage.tsx'; 
 import './App.css';
 
 function App() {
@@ -52,6 +53,14 @@ function App() {
 				<Route
 					path='/player'
 					element={ <Info addPlayer={addPlayer}/> }
+				/>
+				<Route
+					path='/events'
+					element={ <EventPage addPlayer={addPlayer} players={players}/> }
+				/>
+				<Route
+					path='/events/:username'
+					element={ <EventPage addPlayer={addPlayer} players={players}/> }
 				/>
 			</Routes>
 		</div>

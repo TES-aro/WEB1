@@ -3,6 +3,7 @@ import {Quests} from './Quests.tsx'
 import {SearchBar} from './SearchBar.tsx'
 import { PlayerCard } from './PlayerCard.tsx' 
 import { useParams } from 'react-router-dom'
+import { Paper } from '@mui/material'
 
 const Info = ({addPlayer, players}) => {
   let params = useParams();
@@ -28,10 +29,12 @@ const Info = ({addPlayer, players}) => {
     const player = addPlayer(params.username)
     return(
       <div>
-        <SearchBar url='/player' />
-        <PlayerCard player={player} />
-        <Skills skills={player.skills} />
-        <Quests quests={player.quests} />
+        <Paper>
+          <SearchBar url='/player' />
+          <PlayerCard player={player} />
+          <Skills skills={player.skills} />
+          <Quests quests={player.quests} />
+        </Paper>
       </div>
     )
   } catch {
